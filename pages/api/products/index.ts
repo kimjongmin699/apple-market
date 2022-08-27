@@ -8,6 +8,9 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === 'GET') {
+    const {
+      query: { page, limit },
+    } = req
     const products = await client.product.findMany({
       include: {
         _count: {
@@ -16,6 +19,9 @@ async function handler(
           },
         },
       },
+      take: Number(limit),
+      skip: (Number(page) - 1) * Number(limit),
+      orderBy: { createdAt: 'asc' },
     })
     res.json({
       ok: true,
@@ -23,14 +29,14 @@ async function handler(
     })
   }
   if (req.method === 'POST') {
-    const { name, price, description } = req.body
+    const { name, price, description, photoId } = req.body
     const { user } = req.session
     const product = await client.product.create({
       data: {
         name,
         price: +price,
         description,
-        image: 'aaa',
+        image: photoId,
         user: {
           connect: {
             id: user?.id,

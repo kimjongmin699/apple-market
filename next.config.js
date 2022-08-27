@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-}
 
-module.exports = nextConfig
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: ['imagedelivery.net', 'customer-m033z5x00ks6nunl.cloudflarestream.com'],
+  },
+}

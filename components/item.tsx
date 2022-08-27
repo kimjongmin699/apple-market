@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -7,6 +8,7 @@ interface ItemProps {
   price: number
   comments: number
   hearts: number
+  image?: string
 }
 
 export default function Item({
@@ -15,19 +17,29 @@ export default function Item({
   price,
   comments,
   hearts,
+  image,
 }: ItemProps) {
   return (
     <Link href={`/products/${id}`}>
       <a className="flex px-4 py-3 cursor-pointer justify-between shadow-lg">
         <div className="flex space-x-4">
-          <div className="w-20 h-20 bg-gray-400 rounded-md" />
+          {image ? (
+            <Image
+              height={100}
+              width={100}
+              alt="Picture of the author"
+              src={image}
+              className="w-20 h-20 bg-gray-400 rounded-md"
+            />
+          ) : null}
+
           <div className="pt-2 flex flex-col">
             <h3 className="text-sm font-medium text-gray-900">{title}</h3>
             <span className="font-medium mt-1 text-gray-900">${price}</span>
           </div>
         </div>
         <div className="flex space-x-2 items-end justify-end">
-          <div className='flex space-x-0.5 items-center text-sm text-gray-600'>
+          <div className="flex space-x-0.5 items-center text-sm text-gray-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -44,7 +56,7 @@ export default function Item({
             </svg>
             <span>{comments}</span>
           </div>
-          <div className='flex space-x-0.5 items-center text-sm text-gray-600'>
+          <div className="flex space-x-0.5 items-center text-sm text-gray-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
