@@ -60,7 +60,7 @@ export function Enter() {
   return (
     <div className="mt-16 px-4">
       <h1>{data?.payload}</h1>
-      <h3 className="text-3xl font-bold text-center">Enter to Apple Market</h3>
+      <h3 className="text-3xl font-bold text-center">Enter to Orange Market</h3>
       <div className="mt-16">
         {data?.ok ? (
           <form
